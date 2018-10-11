@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Loading...</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    .content-wrapper {
+      margin: 0 auto;
+      max-width: 420px;
+    }
+
+    svg {
+      margin-bottom: 24px;
+      width: 450px;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0px;
+      text-align: center;
+      color: rgba(0, 0, 0, 0.7);
+      margin: 0;
+      margin-bottom: 4px;
+    }
+    
+    p {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.29;
+      text-align: center;
+      color: rgba(0, 0, 0, 0.7);
+    }
+
+    .blink {
+      opacity: 1;
+      animation-name: blink;
+      animation-iteration-count: infinite;
+      animation-fill-mode: forwards;
+      animation-duration: 2s;
+    }
+
+    .blink.blink-2 {
+      animation-delay: .5s;
+    }
+
+    .blink.slow {
+      animation-duration: 3.5s;
+    }
+
+    @keyframes blink {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: .3;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .rotate {
+      transform-origin: 15.5% 11.2%;
+      transform: rotate(0deg);
+      animation-name: rotate;
+      animation-iteration-count: infinite;
+      animation-fill-mode: forwards;
+      animation-duration: 2s;
+      animation-timing-function: linear;
+    }
+
+    .rotate.rotate-2 {
+      transform-origin: 87% 35%;
+    }
+
+    .rotate.rotate-3 {
+      transform-origin: 27% 95%;
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .beat {
+      transform-origin: 47% 47%;
+      animation-name: beat;
+      animation-iteration-count: infinite;
+      animation-fill-mode: forwards;
+      animation-duration: 2s;
+    }
+
+    @keyframes beat {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.04);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    a.btn-green {
+      display: none;
+      border-radius: 4px;
+      background-color: #42b549;
+      width: 100%;
+      font-size: 16px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      text-align: center;
+      margin-top: 20px;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    .coupon-card {
+      border-radius: 4px;
+      background-color: #ffffff;
+      box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12);
+      overflow: hidden;
+      margin-top: 20px;
+    }
+
+    .coupon-banner img{
+      width: 100%;
+      display: block;
+    }
+
+    .coupon-content {
+      padding: 8px;
+      font-size: 16px;
+      line-height: 1.5;
+      color: rgba(0, 0, 0, 0.7);
+    }
+
+    .chip.active {
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+      background-color: #f3fef3;
+      border: solid 1px #42b549;
+    }
+
+    .img-large {
+      height: 120px;
+      width: 100%;
+      margin-top: 30px;
+    }
+
+    .text-long {
+      width: 90%;
+      height: 15px;
+    }
+
+    .text-short {
+      width: 40%;
+      height: 15px;
+    }
+
+    .loading {
+      margin-bottom: 10px;
+      border-radius: 4px;
+      border-color: transparent;
+      animation-duration: 1s;
+      animation-fill-mode: forwards;
+      animation-iteration-count: infinite;
+      animation-name: loading-anim;
+      animation-timing-function: linear;
+      background: darkgray;
+      background: linear-gradient(to right, #eeeeee 10%, #dddddd 18%, #eeeeee 33%);
+      background-size: 800px 104px;
+      position: relative;
+      cursor: default;
+    }
+
+    @keyframes loading-anim {
+      0%{
+        background-position: -468px 0
+      }
+      100%{
+          background-position: 468px 0
+      }
+    }
+
+    .ticker {
+      margin-top: 20px;
+      border-radius: 4px;
+      background-color: #ffffff;
+      border: solid 1px #d3f0d4;
+      border-left-width: 3px;
+      font-size: 14px;
+      line-height: 1.36;
+      letter-spacing: normal;
+      color: rgba(0, 0, 0, 0.7);
+      padding: 12px 16px;
+    }
+
+    .err {
+      height: 100vh;
+      display: none;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .err img {
+      width: 100%;
+      margin-bottom: 32px;
+    }
+
+    .err a {
+      display: block !important;
+    }
+
+    .floating-btn {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      padding: 15px;
+      background: #FFF;
+      box-shadow: 0 -2px 6px 0 rgba(0, 0, 0, 0.12);
+      display: none;
+    }
+
+    .floating-btn a {
+      margin: 0;
+      width: calc(100% - 30px);
+      display: block !important;
+    }
+
+    @media only screen and (max-width: 768px) {
+      .floating-btn {
+        display: block;
+      }
+      .ticker {
+        font-size: 12px;
+      }
+      .content-wrapper {
+        width: calc(100% - 30px);
+      }
+      h1 {
+        font-size: 17px;
+      }
+      p {
+        font-size: 14px;
+      }
+      .coupon-card, a.btn-green {
+        font-size: 13px;
+      }
+      .coupon-content {
+        font-size: 13px;
+      }
+      a.btn-green {
+        display: none;
+      }
+    }
+
+    .block {
+      display: block !important;
+    }
+   
+  </style>
+</head>
+<body>
+  <div class="content-container">
+    <div class="content-wrapper">
+
+      <div id="expired" class="err">
+        <img src="https://ecs7.tokopedia.net/assets-tokopoints/prod/images/2018/10/artboard-4-copy-2-3-x%402x.png" alt="">
+        <p>Mohon maaf, Kupon ini sudah melewati masa berlaku.</p>
+        <a class="btn-green">Cek Kupon Lain</a>
+      </div>
+
+      <div id="restricted" class="err">
+        <img src="https://ecs7.tokopedia.net/assets-tokopoints/prod/images/2018/10/artboard-4-3-x%402x.png" alt="">
+        <p>Mohon maaf, kupon ini tidak berlaku untuk akun Anda.</p>
+        <a class="btn-green">Cek Kupon Lain</a>
+      </div>
+
+      <div id="tech" class="err">
+        <img src="https://ecs7.tokopedia.net/assets-tokopoints/prod/images/2018/10/artboard-4-copy-3-3-x%403x.png" alt="">
+        <p>Terjadi kesalahan pada server, coba lagi ya.</p>
+        <a class="btn-green try-again">Coba Lagi</a>
+      </div>
+
+      <div id="toggle-loader" style="display: none">
+        <div class="img-large loading"></div>
+        <div class="text-long loading"></div>
+        <div class="text-short loading"></div>
+
+        <div class="img-large loading"></div>
+        <div class="text-long loading"></div>
+        <div class="text-short loading"></div>
+      </div>
+    
+      <a class="btn-green">Cek Kupon</a>
+
+      <div class="floating-btn" style="display: none;">
+        <a class="btn-green">Cek Kupon</a>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+  $('.btn-green:not(.try-again)').on('click', function(e){
+      e.preventDefault();
+      setTimeout(function() {
+        window.location.href = "https://m.tokopedia.com/tokopoints/kupon-saya";
+      }, 100);
+      window.location.href = "tokopedia://tokopoints/kupon-saya";
+      });
+
+  $('.try-again').on('click', function() {
+    isClaim(cs, gk, a);
+  });
+
+      function toggleLoader() {
+        $('#toggle-loader').toggle();
+      }
+
+      function prependCoupon(img_url, title) {
+        $('.content-wrapper').prepend('<div class="coupon-card">'+
+              '<div class="coupon-banner">'+
+                '<img src="'+img_url+'">'+
+              '</div>'+
+              '<div class="coupon-content">'+
+                title+
+              '</div>'+
+            '</div>');
+      }
+
+      function prependTicker(msg) {
+        $('.content-wrapper').prepend('<div class="ticker">'+
+                msg+
+              '</div>');
+      }
+
+      function errExpired() {
+        $('#expired').css('display', 'flex');
+      }
+
+      function errRestricted() {
+        $('#restricted').css('display', 'flex');
+      }
+
+      function errTech() {
+        $('#tech').css('display', 'flex');
+      }   
+
+      function toggleBtn(text) {
+        $('.content-wrapper > a.btn-green').text(text);
+        $('.content-wrapper > a.btn-green').show();
+        $('.content-wrapper > a.btn-green').addClass('block');
+      }
+
+      function getCoupons(catalogSlug, tickerMsg, btnText) {
+        var query = '{hachikoCatalogDetail(slug:"'+catalogSlug+'"){id catalog_type expired points title sub_title expired_label expired_str is_disabled is_disabled_button disable_error_message upper_text_desc description overview how_to_use tnc icon thumbnail_url thumbnail_url_mobile image_url image_url_mobile thumbnail_v2_url thumbnail_v2_url_mobile image_v2_url image_v2_url_mobile quota is_gift cta points_str button_str points_slash points_slash_str discount_percentage discount_percentage_str}}';
+        var data = {};
+        data.query = query;
+
+        $.ajax({
+          url: 'https://m-staging.tokopedia.com/graphql',
+          xhrFields: {
+              withCredentials: true
+          },
+          type: "POST",
+          data: JSON.stringify(data),
+          dataType: 'json',
+          success: function(result) {
+            toggleLoader();
+            var coupon = result.data.hachikoCatalogDetail;
+
+            prependCoupon(coupon.image_url_mobile, coupon.title);
+            prependTicker(tickerMsg);
+            toggleBtn(btnText);
+
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+              
+          }
+        });
+      }
+
+      function isClaim(campaignSlug, generateKey, auth) {
+        $('.content-wrapper > .err').hide();
+        $('.content-wrapper > a').hide();
+        $('.content-wrapper > .ticker').hide();
+        $('.content-wrapper > .coupon-card').hide();
+        toggleLoader();
+        var queryClaim = 'mutation {tokopointsClaimCoupon (campaignSlug: "'+campaignSlug+'",generateKey: "'+generateKey+'",auth: "'+auth+'") {resultStatus {code status}redirectUrl redirectAppLink}}';
+        var data = {};
+        data.query = queryClaim;
+
+        $.ajax({
+          url: 'https://m-staging.tokopedia.com/graphql',
+          xhrFields: {
+              withCredentials: true
+          },
+          type: "POST",
+          data: JSON.stringify(data),
+          dataType: 'json',
+          success: function(result) {
+            
+              var status = result.data.tokopointsClaimCoupon.resultStatus.code;
+
+              if(status == "200") {
+                getCoupons(campaignSlug, "Selamat Anda mendapatkan Kupon gratis!", "Cek Kupon Saya");
+              }
+              else if(status == "42504") {
+                toggleLoader();
+                errExpired();
+              }
+              else if(status == "46001" || status == "401") {
+                toggleLoader();
+                errRestricted();
+              }
+              else if(status == "42022") {
+                getCoupons(campaignSlug, "Selamat Anda mendapatkan Kupon gratis!", "Cek Kupon Saya");
+              } else {
+                toggleLoader();
+                errTech();
+              }
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            toggleLoader();
+            errTech();
+          }
+        });
+      }
+
+      var url_string = window.location.href;
+      var url = new URL(url_string);
+      var cs = url.searchParams.get("cs");
+      var gk = url.searchParams.get("gk");
+      var a = url.searchParams.get("a");
+
+      isClaim(cs, gk, a);
+
+  </script>
+</body>
+</html>
