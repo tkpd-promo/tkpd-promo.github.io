@@ -269,7 +269,14 @@
         font-size: 13px;
       }
       a.btn-green {
-        display: none;
+        position: fixed;
+        bottom: 15px;
+        width: calc(100% - 30px);
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 420px;
+        z-index: 9;
+        box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.24);
       }
     }
 
@@ -323,9 +330,9 @@
   $('.btn-green:not(.try-again)').on('click', function(e){
       e.preventDefault();
       setTimeout(function() {
-        window.location.href = "https://m.tokopedia.com/tokopoints/kupon-saya";
+        window.location.href = "https://www.tokopedia.com/tokopoints/";
       }, 100);
-      window.location.href = "tokopedia://tokopoints/kupon-saya";
+      window.location.href = "tokopedia://tokopoints";
       });
 
   $('.try-again').on('click', function() {
